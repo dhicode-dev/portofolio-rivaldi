@@ -1,11 +1,7 @@
-// ===== EmailJS Configuration =====
-// PENTING: Ganti dengan credentials EmailJS Anda
-// Daftar di https://www.emailjs.com/ untuk mendapatkan credentials
-
 const EMAILJS_CONFIG = {
-    publicKey: 'qyfwdVozIyqP_v9E-',
-    serviceId: 'service_ugvypp5',
-    templateId: 'template_qp9kgyr'
+    publicKey: 'qyfwdVozIyqP_v9E-',        // Ganti dengan Public Key dari EmailJS
+    serviceId: 'service_ugvypp5',        // Ganti dengan Service ID dari EmailJS
+    templateId: 'template_qp9kgyr'         // Template ID dari EmailJS
 };
 
 // ===== Initialize EmailJS =====
