@@ -1,7 +1,7 @@
 const EMAILJS_CONFIG = {
     publicKey: 'qyfwdVozIyqP_v9E-',
     serviceId: 'service_ugvypp5',
-    templateId: 'template_i3acr9w'
+    templateId: 'template_1zli7qq'
 };
 
 // Email penerima (harus sama dengan yang dipakai di template, atau gunakan {{to_email}})
