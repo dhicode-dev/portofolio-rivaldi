@@ -1,7 +1,11 @@
+// ===== EmailJS Configuration =====
+// PENTING: Ganti dengan credentials EmailJS Anda
+// Daftar di https://www.emailjs.com/ untuk mendapatkan credentials
+
 const EMAILJS_CONFIG = {
     publicKey: 'qyfwdVozIyqP_v9E-',        // Ganti dengan Public Key dari EmailJS
     serviceId: 'service_ugvypp5',        // Ganti dengan Service ID dari EmailJS
-    templateId: 'template_i3acr9w'       // Ganti dengan Template ID dari EmailJS
+    templateId: 'template_qp9kgyr'         // Template ID dari EmailJS
 };
 
 // ===== Initialize EmailJS =====
@@ -37,10 +41,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Get form data
         const formData = {
-            from_name: document.getElementById('from_name').value,
-            from_email: document.getElementById('from_email').value,
-            subject: document.getElementById('subject').value,
+            name: document.getElementById('from_name').value,
+            email: document.getElementById('from_email').value,
             message: document.getElementById('message').value,
+            time: new Date().toLocaleString('id-ID', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            }),
             to_email: 'rivaldihidayatullah00@gmail.com', // Email penerima
             reply_to: document.getElementById('from_email').value
         };
@@ -57,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let errorMsg = '❌ Gagal mengirim pesan. ';
 
                 if (error.status === 400) {
-                    errorMsg += 'Template tidak valid. Pastikan variabel {{from_name}}, {{from_email}}, {{subject}}, {{message}} sudah ada di EmailJS template.';
+                    errorMsg += 'Template tidak valid. Pastikan variabel {{name}}, {{email}}, {{message}}, {{time}} sudah ada di EmailJS template.';
                 } else if (error.status === 401) {
                     errorMsg += 'Public Key tidak valid. Cek konfigurasi di assets/js/email.js';
                 } else if (error.status === 403) {
