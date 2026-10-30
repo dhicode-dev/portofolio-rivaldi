@@ -1,7 +1,8 @@
+// ===== EmailJS Configuration =====
 const EMAILJS_CONFIG = {
-    publicKey: 'qyfwdVozIyqP_v9E-',        // Ganti dengan Public Key dari EmailJS
-    serviceId: 'service_ugvypp5',        // Ganti dengan Service ID dari EmailJS
-    templateId: 'template_qp9kgyr'         // Template ID dari EmailJS
+    publicKey: 'qyfwdVozIyqP_v9E-',
+    serviceId: 'service_ugvypp5',
+    templateId: 'template_qp9kgyr'
 };
 
 // ===== Initialize EmailJS =====
@@ -26,16 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // Check if EmailJS is configured
         if (EMAILJS_CONFIG.publicKey === 'YOUR_PUBLIC_KEY') {
             showMessage('⚠️ EmailJS belum dikonfigurasi. Silakan update credentials di file assets/js/email.js', 'warning');
             return;
         }
 
-        // Show loading state
         setLoadingState(true);
 
-        // Get form data
         // Kirim semua variabel untuk Template Settings & Template HTML
         const formData = {
             // === Untuk Template Settings (From name, Reply to, Subject) ===
@@ -61,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
             reply_to: document.getElementById('from_email').value
         };
 
-        // Send email using EmailJS
         emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, formData)
             .then(function(response) {
                 console.log('SUCCESS!', response);
@@ -69,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 form.reset();
             }, function(error) {
                 console.error('FAILED...', error);
-                // Show detailed error for debugging
                 let errorMsg = '❌ Gagal mengirim pesan. ';
 
                 if (error.status === 400) {
@@ -92,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 
-    // ===== Helper Functions =====
     function setLoadingState(isLoading) {
         if (isLoading) {
             submitBtn.disabled = true;
@@ -121,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
 
-        // Auto hide after 5 seconds
         setTimeout(function() {
             formMessage.classList.add('hidden');
         }, 5000);
