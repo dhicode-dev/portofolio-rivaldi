@@ -1,9 +1,17 @@
-// ===== EmailJS Configuration =====
 const EMAILJS_CONFIG = {
     publicKey: 'qyfwdVozIyqP_v9E-',
     serviceId: 'service_ugvypp5',
     templateId: 'template_qp9kgyr'
 };
+
+// ===== Helper: Ambil teks terjemahan =====
+function t(key, fallback) {
+    if (typeof translations !== 'undefined' && translations) {
+        const lang = localStorage.getItem('preferredLang') || 'id';
+        return (translations[lang] && translations[lang][key]) || fallback;
+    }
+    return fallback;
+}
 
 // ===== Initialize EmailJS =====
 (function() {
@@ -27,13 +35,16 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
+        // Check if EmailJS is configured
         if (EMAILJS_CONFIG.publicKey === 'YOUR_PUBLIC_KEY') {
             showMessage('⚠️ EmailJS belum dikonfigurasi. Silakan update credentials di file assets/js/email.js', 'warning');
             return;
         }
 
+        // Show loading state
         setLoadingState(true);
 
+        // Get form data
         // Kirim semua variabel untuk Template Settings & Template HTML
         const formData = {
             // === Untuk Template Settings (From name, Reply to, Subject) ===
@@ -59,25 +70,24 @@ document.addEventListener('DOMContentLoaded', function() {
             reply_to: document.getElementById('from_email').value
         };
 
+        // Send email using EmailJS
         emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, formData)
             .then(function(response) {
                 console.log('SUCCESS!', response);
-                showMessage('✅ Pesan berhasil dikirim! Terima kasih telah menghubungi saya. Saya akan segera membalas.', 'success');
+                showMessage(t('form_success', '✅ Pesan berhasil dikirim! Terima kasih telah menghubungi saya. Saya akan segera membalas.'), 'success');
                 form.reset();
             }, function(error) {
                 console.error('FAILED...', error);
-                let errorMsg = '❌ Gagal mengirim pesan. ';
+                let errorMsg = t('form_error', '❌ Gagal mengirim pesan. Silakan coba lagi atau hubungi saya melalui email/WhatsApp.');
 
                 if (error.status === 400) {
-                    errorMsg += 'Template tidak valid. Pastikan variabel {{name}}, {{email}}, {{message}}, {{time}} sudah ada di EmailJS template.';
-                } else if (error.status === 401) {
-                    errorMsg += 'Public Key tidak valid. Cek konfigurasi di assets/js/email.js';
-                } else if (error.status === 403) {
-                    errorMsg += 'Service tidak aktif. Cek EmailJS dashboard.';
+                    errorMsg = t('form_error_template', 'Template tidak valid. Hubungi admin.');
+                } else if (error.status === 401 || error.status === 403) {
+                    errorMsg = t('form_error_auth', 'Konfigurasi email tidak valid.');
                 } else if (error.status === 404) {
-                    errorMsg += 'Service/Template ID salah. Cek konfigurasi di assets/js/email.js';
+                    errorMsg = t('form_error_service', 'Service email tidak aktif.');
                 } else if (error.text) {
-                    errorMsg += error.text;
+                    errorMsg += ' ' + error.text;
                 }
 
                 console.error('Error detail:', error);
@@ -88,14 +98,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 
+    // ===== Helper Functions =====
     function setLoadingState(isLoading) {
         if (isLoading) {
             submitBtn.disabled = true;
-            btnText.textContent = 'Mengirim...';
+            btnText.textContent = t('form_submitting', 'Mengirim...');
             loadingSpinner.classList.remove('hidden');
         } else {
             submitBtn.disabled = false;
-            btnText.textContent = 'Kirim Pesan';
+            btnText.textContent = t('form_submit', 'Kirim Pesan');
             loadingSpinner.classList.add('hidden');
         }
     }
@@ -116,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
 
+        // Auto hide after 5 seconds
         setTimeout(function() {
             formMessage.classList.add('hidden');
         }, 5000);
