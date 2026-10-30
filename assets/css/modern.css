@@ -1,0 +1,242 @@
+/* ===== Modern Portfolio CSS ===== */
+
+/* ===== Base Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Scrollbar Styling ===== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #4f46e5, #7c3aed);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #4338ca, #6d28d9);
+}
+
+/* ===== Selection Styling ===== */
+::selection {
+    background: #e0e7ff;
+    color: #4f46e5;
+}
+
+/* ===== Navbar Styles ===== */
+#navbar {
+    transition: all 0.3s ease;
+}
+
+#navbar.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Language Button Styles ===== */
+.lang-active {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.lang-inactive {
+    color: #64748b;
+}
+
+.lang-inactive:hover {
+    background: #f1f5f9;
+    color: #4f46e5;
+}
+
+/* ===== Smooth Scroll ===== */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===== Animation Classes ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* ===== Gradient Text ===== */
+.gradient-text {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===== Card Hover Effects ===== */
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(79, 70, 229, 0.15);
+}
+
+/* ===== Timeline Styles ===== */
+.timeline-line {
+    background: linear-gradient(180deg, #4f46e5, #7c3aed);
+}
+
+/* ===== Swiper Customization ===== */
+.swiper-pagination-bullet {
+    background: white;
+    opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    opacity: 1;
+    width: 24px;
+    border-radius: 6px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    transform: scale(1.1);
+}
+
+/* ===== Fancybox Customization ===== */
+.fancybox__container {
+    --fancybox-bg: rgba(15, 23, 42, 0.95);
+}
+
+/* ===== Mobile Menu ===== */
+.mobile-link {
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.mobile-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    transition: width 0.3s ease;
+}
+
+.mobile-link:hover::after {
+    width: 100%;
+}
+
+/* ===== Button Ripple Effect ===== */
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-ripple:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* ===== Image Loading Placeholder ===== */
+img {
+    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+}
+
+/* ===== Focus States for Accessibility ===== */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid #4f46e5;
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 768px) {
+    .animate-float {
+        animation: none;
+    }
+}
+
+/* ===== Dark Mode Support (Optional) ===== */
+@media (prefers-color-scheme: dark) {
+    /* Can be extended for dark mode */
+}
+
+/* ===== Print Styles ===== */
+@media print {
+    nav,
+    footer,
+    #back-to-top,
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+    }
+}
