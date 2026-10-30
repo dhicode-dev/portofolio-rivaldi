@@ -3,9 +3,9 @@
 // Daftar di https://www.emailjs.com/ untuk mendapatkan credentials
 
 const EMAILJS_CONFIG = {
-    publicKey: 'qyfwdVozIyqP_v9E-',        // Ganti dengan Public Key dari EmailJS
-    serviceId: 'service_ugvypp5',        // Ganti dengan Service ID dari EmailJS
-    templateId: 'template_qp9kgyr'         // Template ID dari EmailJS
+    publicKey: 'qyfwdVozIyqP_v9E-',
+    serviceId: 'service_ugvypp5',
+    templateId: 'template_qp9kgyr'
 };
 
 // ===== Initialize EmailJS =====
@@ -40,7 +40,14 @@ document.addEventListener('DOMContentLoaded', function() {
         setLoadingState(true);
 
         // Get form data
+        // Kirim semua variabel untuk Template Settings & Template HTML
         const formData = {
+            // === Untuk Template Settings (From name, Reply to, Subject) ===
+            from_name: document.getElementById('from_name').value,
+            from_email: document.getElementById('from_email').value,
+            subject: document.getElementById('subject')?.value || 'Pesan dari form kontak',
+
+            // === Untuk Template HTML Content ({{name}}, {{message}}, {{time}}) ===
             name: document.getElementById('from_name').value,
             email: document.getElementById('from_email').value,
             message: document.getElementById('message').value,
@@ -52,7 +59,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 hour: '2-digit',
                 minute: '2-digit'
             }),
-            to_email: 'rivaldihidayatullah00@gmail.com', // Email penerima
+
+            // === Untuk routing email ===
+            to_email: 'rivaldihidayatullah00@gmail.com',
             reply_to: document.getElementById('from_email').value
         };
 
