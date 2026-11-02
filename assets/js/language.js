@@ -38,11 +38,19 @@ function setLanguage(lang) {
         return;
     }
 
-    // Update semua elemen dengan data-key
+    // Update semua elemen dengan data-key (untuk teks/innerHTML)
     document.querySelectorAll('[data-key]').forEach(elem => {
         const key = elem.getAttribute('data-key');
         if (translations[lang][key]) {
             elem.innerHTML = translations[lang][key];
+        }
+    });
+
+    // Update semua elemen dengan data-key-placeholder (untuk placeholder input/textarea)
+    document.querySelectorAll('[data-key-placeholder]').forEach(elem => {
+        const key = elem.getAttribute('data-key-placeholder');
+        if (translations[lang][key]) {
+            elem.setAttribute('placeholder', translations[lang][key]);
         }
     });
 
