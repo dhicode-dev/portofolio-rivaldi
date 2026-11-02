@@ -2,7 +2,7 @@
 
 Website portofolio **modern, responsif, dan elegan** dengan desain terkini. Dibangun dengan teknologi web terbaru untuk pengalaman pengguna yang optimal.
 
-**🌐 Live Demo:** [https://codejaya.github.io/portofolio-utama/](https://codejaya.github.io/portofolio-utama/)
+**🌐 Live Demo:** [https://dhicode-dev.github.io/portofolio-rivaldi/](https://dhicode-dev.github.io/portofolio-rivaldi/)
 
 ---
 
@@ -90,7 +90,7 @@ Website portofolio **modern, responsif, dan elegan** dengan desain terkini. Diba
 ## 📁 Struktur Proyek
 
 ```
-portofolio-utama/
+portofolio-rivaldi/
 ├── index.html                  # Halaman utama
 ├── languages.json              # Data multi-bahasa (ID & EN)
 ├── robots.txt                  # Konfigurasi SEO crawler
@@ -126,8 +126,8 @@ portofolio-utama/
 ### 1. Clone atau Download
 
 ```bash
-git clone https://github.com/Codejaya/portofolio-utama.git
-cd portofolio-utama
+git clone https://github.com/dhicode-dev/portofolio-rivaldi.git
+cd portofolio-rivaldi
 ```
 
 ### 2. Buka di Browser
@@ -144,7 +144,7 @@ git commit -m "Modern portfolio website"
 
 # Push ke GitHub
 git branch -M main
-git remote add origin https://github.com/Codejaya/portofolio-utama.git
+git remote add origin https://github.com/dhicode-dev/portofolio-rivaldi.git
 git push -u origin main
 ```
 
@@ -292,7 +292,7 @@ Copy salah satu `<article>` di section projects, lalu ubah:
 1. Push repository ke GitHub
 2. Buka **Settings** → **Pages**
 3. Source: **Deploy from branch** → `main` → `/ (root)`
-4. Website live di: `https://codejaya.github.io/portofolio-utama/`
+4. Website live di: `https://dhicode-dev.github.io/portofolio-rivaldi/`
 
 ### Netlify
 
@@ -365,7 +365,7 @@ Copy salah satu `<article>` di section projects, lalu ubah:
 - **WhatsApp:** +62 821-8900-4392
 - **LinkedIn:** [rivaldihidayatullah](https://linkedin.com/in/rivaldihidayatullah)
 - **Instagram:** [@rivaldihidayatullah_](https://instagram.com/rivaldihidayatullah_)
-- **GitHub:** [Codejaya](https://github.com/Codejaya)
+- **GitHub:** [dhicode-dev](https://github.com/dhicode-dev)
 
 ---
 
