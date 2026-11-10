@@ -1,3 +1,4 @@
+// TODO: Ganti dengan credentials EmailJS Anda jika belum dikonfigurasi
 const EMAILJS_CONFIG = {
     publicKey: 'qyfwdVozIyqP_v9E-',
     serviceId: 'service_ugvypp5',
@@ -11,6 +12,51 @@ function t(key, fallback) {
         return (translations[lang] && translations[lang][key]) || fallback;
     }
     return fallback;
+}
+
+// ===== Helper: Validasi email =====
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// ===== Helper: Validasi form =====
+function validateForm() {
+    const name = document.getElementById('from_name').value.trim();
+    const email = document.getElementById('from_email').value.trim();
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value.trim();
+
+    // Validasi nama
+    if (!name) {
+        return { valid: false, error: t('form_error_name', 'Nama lengkap wajib diisi.') };
+    }
+    if (name.length < 2) {
+        return { valid: false, error: t('form_error_name_min', 'Nama minimal 2 karakter.') };
+    }
+
+    // Validasi email
+    if (!email) {
+        return { valid: false, error: t('form_error_email_required', 'Email wajib diisi.') };
+    }
+    if (!isValidEmail(email)) {
+        return { valid: false, error: t('form_error_email_invalid', 'Format email tidak valid.') };
+    }
+
+    // Validasi posisi/tujuan
+    if (!subject) {
+        return { valid: false, error: t('form_error_subject', 'Silakan pilih posisi atau tujuan pesan.') };
+    }
+
+    // Validasi pesan
+    if (!message) {
+        return { valid: false, error: t('form_error_message', 'Pesan wajib diisi.') };
+    }
+    if (message.length < 10) {
+        return { valid: false, error: t('form_error_message_min', 'Pesan minimal 10 karakter.') };
+    }
+
+    return { valid: true };
 }
 
 // ===== Initialize EmailJS =====
@@ -35,6 +81,21 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
+        // ===== Honeypot check =====
+        const honeypot = document.getElementById('website');
+        if (honeypot && honeypot.value) {
+            // Bot terdeteksi, diam-diam tolak
+            console.warn('Spam detected via honeypot');
+            return;
+        }
+
+        // ===== Validasi sisi klien =====
+        const validation = validateForm();
+        if (!validation.valid) {
+            showMessage(validation.error, 'error');
+            return;
+        }
+
         // Check if EmailJS is configured
         if (EMAILJS_CONFIG.publicKey === 'YOUR_PUBLIC_KEY') {
             showMessage('⚠️ EmailJS belum dikonfigurasi. Silakan update credentials di file assets/js/email.js', 'warning');
@@ -45,17 +106,16 @@ document.addEventListener('DOMContentLoaded', function() {
         setLoadingState(true);
 
         // Get form data
-        // Kirim semua variabel untuk Template Settings & Template HTML
         const formData = {
-            // === Untuk Template Settings (From name, Reply to, Subject) ===
-            from_name: document.getElementById('from_name').value,
-            from_email: document.getElementById('from_email').value,
-            subject: document.getElementById('subject')?.value || 'Pesan dari form kontak',
+            // === Untuk Template Settings ===
+            from_name: document.getElementById('from_name').value.trim(),
+            from_email: document.getElementById('from_email').value.trim(),
+            subject: document.getElementById('subject').value,
 
-            // === Untuk Template HTML Content ({{name}}, {{message}}, {{time}}) ===
-            name: document.getElementById('from_name').value,
-            email: document.getElementById('from_email').value,
-            message: document.getElementById('message').value,
+            // === Untuk Template HTML Content ===
+            name: document.getElementById('from_name').value.trim(),
+            email: document.getElementById('from_email').value.trim(),
+            message: document.getElementById('message').value.trim(),
             time: new Date().toLocaleString('id-ID', {
                 weekday: 'long',
                 year: 'numeric',
@@ -67,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // === Untuk routing email ===
             to_email: 'rivaldihidayatullah00@gmail.com',
-            reply_to: document.getElementById('from_email').value
+            reply_to: document.getElementById('from_email').value.trim()
         };
 
         // Send email using EmailJS
@@ -126,6 +186,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 formMessage.classList.add('bg-yellow-500/20', 'text-yellow-400');
                 break;
         }
+
+        // Scroll to message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         // Auto hide after 5 seconds
         setTimeout(function() {
