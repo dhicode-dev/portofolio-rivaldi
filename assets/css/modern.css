@@ -7,6 +7,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -208,6 +213,16 @@ html {
 /* ===== Image Loading Placeholder ===== */
 img {
     background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    max-width: 100%;
+    height: auto;
+}
+
+/* ===== Touch Targets ===== */
+@media (max-width: 768px) {
+    button, a, [role="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
 }
 
 /* ===== Focus States for Accessibility ===== */
@@ -219,9 +234,361 @@ button:focus-visible {
 }
 
 /* ===== Responsive Adjustments ===== */
+
+/* Mobile Small (320px - 480px) */
+@media (max-width: 480px) {
+    /* Base spacing */
+    body {
+        font-size: 14px;
+    }
+
+    /* Container padding */
+    section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Hero section */
+    header#about {
+        padding-top: 5rem;
+        padding-bottom: 2rem;
+    }
+
+    header#about h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2;
+    }
+
+    header#about .text-5xl {
+        font-size: 2.5rem !important;
+    }
+
+    header#about p {
+        font-size: 0.9rem;
+    }
+
+    /* Profile image */
+    header#about .relative.w-full {
+        max-width: 280px !important;
+    }
+
+    /* Badges */
+    header#about .flex.flex-wrap.gap-3 {
+        gap: 0.5rem;
+    }
+
+    header#about .flex.flex-wrap.gap-3 span {
+        font-size: 0.7rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    /* CTA Buttons */
+    header#about .flex-col {
+        gap: 0.75rem;
+    }
+
+    header#about a.px-8 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-top: 0.875rem;
+        padding-bottom: 0.875rem;
+        font-size: 0.875rem;
+    }
+
+    /* Section headings */
+    section h2 {
+        font-size: 1.875rem !important;
+    }
+
+    section .text-4xl {
+        font-size: 1.875rem !important;
+    }
+
+    /* Experience timeline */
+    #experience .space-y-10 {
+        gap: 1.5rem;
+    }
+
+    #experience .pl-12 {
+        padding-left: 2.5rem;
+    }
+
+    #experience .p-6 {
+        padding: 1rem;
+    }
+
+    #experience h3 {
+        font-size: 1rem;
+    }
+
+    #experience .text-xs {
+        font-size: 0.7rem;
+    }
+
+    #experience .text-sm {
+        font-size: 0.8rem;
+    }
+
+    /* Sidebar cards */
+    #experience .lg\:col-span-5 .p-8 {
+        padding: 1.25rem;
+    }
+
+    #experience .lg\:col-span-5 h3 {
+        font-size: 1rem;
+    }
+
+    /* Skills */
+    .flex.flex-wrap.gap-2 {
+        gap: 0.375rem;
+    }
+
+    .flex.flex-wrap.gap-2 span {
+        font-size: 0.7rem;
+        padding: 0.5rem 0.625rem;
+    }
+
+    /* Projects */
+    #projects .grid-cols-1 {
+        gap: 1.5rem;
+    }
+
+    #projects .p-6 {
+        padding: 1.25rem;
+    }
+
+    #projects h3 {
+        font-size: 1.125rem;
+    }
+
+    #projects p {
+        font-size: 0.8rem;
+    }
+
+    /* Case study */
+    #case-study .grid {
+        gap: 1.5rem;
+    }
+
+    #case-study h2 {
+        font-size: 1.5rem !important;
+    }
+
+    #case-study h3 {
+        font-size: 0.9rem;
+    }
+
+    #case-study p {
+        font-size: 0.8rem;
+    }
+
+    /* Footer */
+    footer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    footer h2 {
+        font-size: 2rem !important;
+    }
+
+    footer p {
+        font-size: 0.875rem;
+    }
+
+    /* Social links */
+    footer .flex-wrap.gap-4 {
+        gap: 0.75rem;
+    }
+
+    footer .w-16 {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    footer .text-xl {
+        font-size: 1.25rem;
+    }
+
+    /* Form */
+    footer form .space-y-5 {
+        gap: 1rem;
+    }
+
+    footer form input,
+    footer form textarea,
+    footer form select {
+        font-size: 0.875rem;
+        padding: 0.75rem;
+    }
+
+    footer form label {
+        font-size: 0.8rem;
+    }
+
+    footer form button {
+        padding: 0.875rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Mobile Large (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    /* Hero section */
+    header#about h1 {
+        font-size: 3rem !important;
+    }
+
+    header#about .text-5xl {
+        font-size: 3rem !important;
+    }
+
+    /* Section headings */
+    section h2 {
+        font-size: 2.25rem !important;
+    }
+
+    section .text-4xl {
+        font-size: 2.25rem !important;
+    }
+
+    /* Experience */
+    #experience .pl-12 {
+        padding-left: 2.75rem;
+    }
+
+    /* Profile image */
+    header#about .relative.w-full {
+        max-width: 320px !important;
+    }
+}
+
+/* Tablet (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Hero section */
+    header#about h1 {
+        font-size: 3.5rem !important;
+    }
+
+    header#about .text-5xl {
+        font-size: 3.5rem !important;
+    }
+
+    /* Section headings */
+    section h2 {
+        font-size: 2.5rem !important;
+    }
+
+    section .text-4xl {
+        font-size: 2.5rem !important;
+    }
+}
+
+/* Mobile specific adjustments */
 @media (max-width: 768px) {
     .animate-float {
         animation: none;
+    }
+
+    /* Disable hover effects on mobile */
+    .hover\:-translate-y-0\.5:hover,
+    .hover\:-translate-y-1:hover,
+    .hover\:-translate-y-2:hover {
+        transform: none !important;
+    }
+
+    /* Improve touch targets */
+    button,
+    a {
+        min-height: 44px;
+    }
+
+    /* Navbar adjustments */
+    #navbar .max-w-7xl {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+        width: 85%;
+        max-width: 320px;
+    }
+
+    #mobile-menu .p-10 {
+        padding: 1.5rem;
+    }
+
+    #mobile-menu .text-lg {
+        font-size: 1rem;
+    }
+
+    /* Prevent horizontal scroll */
+    html, body {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
+    /* Improve image loading */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Swiper navigation buttons */
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 2rem !important;
+        height: 2rem !important;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 1rem !important;
+    }
+}
+
+/* Small mobile devices (iPhone SE, etc) */
+@media (max-width: 375px) {
+    header#about h1 {
+        font-size: 2.25rem !important;
+    }
+
+    header#about .text-5xl {
+        font-size: 2.25rem !important;
+    }
+
+    section h2 {
+        font-size: 1.75rem !important;
+    }
+
+    section .text-4xl {
+        font-size: 1.75rem !important;
+    }
+
+    /* Reduce padding */
+    section {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    /* Smaller badges */
+    header#about .flex.flex-wrap.gap-3 span {
+        font-size: 0.65rem;
+        padding: 0.375rem 0.625rem;
+    }
+}
+
+/* Landscape mode on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    header#about {
+        min-height: auto;
+        padding-top: 4rem;
+        padding-bottom: 2rem;
+    }
+
+    header#about .grid {
+        gap: 1.5rem;
     }
 }
 
