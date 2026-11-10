@@ -107,12 +107,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // --- 6. Proteksi Kontak Anti-Scraper ---
+    window.openEmail = function(e) {
+        e.preventDefault();
+        const emailLink = document.getElementById('contact-email');
+        if (emailLink) {
+            const user = emailLink.getAttribute('data-user');
+            const domain = emailLink.getAttribute('data-domain');
+            if (user && domain) {
+                window.location.href = 'mailto:' + user + '@' + domain;
+            }
+        }
+        return false;
+    };
+
+    window.openWhatsApp = function(e) {
+        e.preventDefault();
+        const waLink = document.getElementById('contact-whatsapp');
+        if (waLink) {
+            const phone = waLink.getAttribute('data-phone');
+            if (phone) {
+                window.open('https://wa.me/' + phone, '_blank');
+            }
+        }
+        return false;
+    };
+
     // Tutup modal dengan tombol ESC
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') window.closeModal();
     });
 
-    // --- 6. Inisialisasi Swiper untuk Tiap Project Slider ---
+    // --- 7. Inisialisasi Swiper untuk Tiap Project Slider ---
     if (typeof Swiper !== 'undefined') {
         document.querySelectorAll('.swiper[class*="swiper-projek-"]').forEach(swiperEl => {
             new Swiper(swiperEl, {
@@ -137,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 7. Inisialisasi Fancybox ---
+    // --- 8. Inisialisasi Fancybox ---
     if (typeof Fancybox !== 'undefined') {
         Fancybox.bind('[data-fancybox]', {
             Toolbar: {
@@ -152,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 8. Smooth Scroll untuk Anchor Links ---
+    // --- 9. Smooth Scroll untuk Anchor Links ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
@@ -170,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 9. Intersection Observer untuk Scroll Animations ---
+    // --- 10. Intersection Observer untuk Scroll Animations ---
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
