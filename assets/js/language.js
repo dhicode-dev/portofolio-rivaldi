@@ -60,6 +60,22 @@ function setLanguage(lang) {
 
     // Update atribut lang di HTML tag (bagus untuk SEO)
     document.documentElement.lang = lang;
+
+    // Update meta description berdasarkan bahasa
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && translations[lang]['meta_description']) {
+        metaDesc.setAttribute('content', translations[lang]['meta_description']);
+    }
+
+    // Update og:description dan twitter:description
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const twitterDesc = document.querySelector('meta[property="twitter:description"]');
+    if (ogDesc && translations[lang]['og_description']) {
+        ogDesc.setAttribute('content', translations[lang]['og_description']);
+    }
+    if (twitterDesc && translations[lang]['twitter_description']) {
+        twitterDesc.setAttribute('content', translations[lang]['twitter_description']);
+    }
 }
 
 function updateButtonStyles(lang) {
